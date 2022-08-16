@@ -1,36 +1,15 @@
 //import logo from '../logo.svg';
 //import './App.css';
 
+import './Header';
+import './Main';
+
 function App() {
   return (
     <div className="App">
       <div className="page">
-          <header className="header section">
-            <a className="logo" href="#"></a>
-          </header>
-          <main className="content section">
-            <section className="profile section-size-full">
-              <button className="profile__button-avatar" type="button"></button>
-              <div className="profile__info">
-                <div className="profile__wrapper">
-                  <h1 className="profile__info-name">Загрузка...</h1>
-                  <button className="profile__button-edit" type="button"></button>
-                </div>
-
-                <p className="profile__info-descript">Загрузка...</p>
-              </div>
-              <button className="profile__button-add" type="button"></button>
-            </section>
-
-            <section className="elements-grid section-size-full" aria-label="Карточки мест">
-              <ul className="elements-grid__list"></ul>
-            </section>
-
-            <footer className="footer section-size-full">
-              <p className="footer__text">&copy;&nbsp;2022 Mesto Russia</p>
-            </footer>
-          </main>
-
+          <Header />
+          <Main />
           <div className="popup popup_edit_data">
             <form className="popup__container" name="form-edit-info" action="/" method="post" novalidate>
               <button className="popup__button-close" type="button"></button>
