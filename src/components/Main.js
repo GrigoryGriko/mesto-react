@@ -2,15 +2,15 @@ import Footer from './Footer.js';
 
 
 function handleEditAvatarClick() {
-  document.querySelector('.popup_update_avatar').classList.add('.popup_opened');
+  document.querySelector('.popup_update_avatar').classList.add('popup_opened');
 }
 
 function handleEditProfileClick() {
-  document.querySelector('.popup_edit_data').classList.add('.popup_opened');
+  document.querySelector('.popup_edit_data').classList.add('popup_opened');
 }
 
 function handleAddPlaceClick() {
-  document.querySelector('.popup_add_card').classList.add('.popup_opened');
+  document.querySelector('.popup_add_card').classList.add('popup_opened');
 }
 
 
