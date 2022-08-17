@@ -5,6 +5,20 @@ import Header from './Header.js';
 import Main from './Main.js';
 
 import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
+
+
+function handleEditAvatarClick() {
+  document.querySelector('.popup_update_avatar').classList.add('popup_opened');
+}
+
+function handleEditProfileClick() {
+  document.querySelector('.popup_edit_data').classList.add('popup_opened');
+}
+
+function handleAddPlaceClick() {
+  document.querySelector('.popup_add_card').classList.add('popup_opened');
+}
 
 
 function App() {
@@ -12,7 +26,8 @@ function App() {
     <div className="App">
       <div className="page">
           <Header />
-          <Main />
+          <Main onEditProfile={handleEditAvatarClick} onAddPlace={handleEditProfileClick} 
+            onEditAvatar={handleAddPlaceClick}/>
           
           <PopupWithForm title="Редактировать профиль" name="edit_data" textSubmit="Сохранить" 
             children= {
@@ -74,14 +89,7 @@ function App() {
 
           <PopupWithForm title="Вы уверены?" name="delete_card" textSubmit="Да" children= {<></>} />
 
-          <div className="popup popup_background_black popup_show_image">
-            <div className="popup__wrapper">
-              <img className="popup__full-image" src="/" alt="место" />
-              <button className="popup__button-close" type="button"></button>
-
-              <blockquote className="popup__caption"></blockquote>
-            </div>
-          </div>
+          <ImagePopup />
         </div>
 
         <template id="elements-grid__item-template">
