@@ -8,28 +8,36 @@ import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 
 
-function handleEditAvatarClick() {
-  document.querySelector('.popup_update_avatar').classList.add('popup_opened');
-}
-
-function handleEditProfileClick() {
-  document.querySelector('.popup_edit_data').classList.add('popup_opened');
-}
-
-function handleAddPlaceClick() {
-  document.querySelector('.popup_add_card').classList.add('popup_opened');
-}
-
-
 function App() {
+  function handleEditAvatarClick() {
+    isEditAvatarPopupOpen = true;
+  }
+  
+  function handleEditProfileClick() {
+    isEditProfilePopupOpen = true;
+  }
+  
+  function handleAddPlaceClick() {
+    isAddPlacePopupOpen = true;
+  }
+
+  let isEditProfilePopupOpen = false;
+  let isAddPlacePopupOpen = false;
+  let isEditAvatarPopupOpen = false;
+
+  setInterval(() => {
+    console.log(isEditProfilePopupOpen);
+  }, 1000)
+
+
   return (
     <div className="App">
       <div className="page">
           <Header />
-          <Main onEditProfile={handleEditAvatarClick} onAddPlace={handleEditProfileClick} 
-            onEditAvatar={handleAddPlaceClick}/>
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick}/>
           
-          <PopupWithForm title="Редактировать профиль" name="edit_data" textSubmit="Сохранить" 
+          <PopupWithForm title="Редактировать профиль" name="edit_data" isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''} textSubmit="Сохранить" 
             children= {
               <>
                 <label className="popup__field">
@@ -51,7 +59,7 @@ function App() {
             }
           />
 
-          <PopupWithForm title="Новое место" name="add_card" textSubmit="Создать" 
+          <PopupWithForm title="Новое место" name="add_card" isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''} textSubmit="Создать" 
             children= {
               <>
                 <label className="popup__field">
@@ -73,7 +81,7 @@ function App() {
             }
           />
 
-          <PopupWithForm title="Обновить аватар" name="update_avatar" textSubmit="Сохранить" 
+          <PopupWithForm title="Обновить аватар" name="update_avatar" isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''} textSubmit="Сохранить" 
             children= {
               <>
                 <label className="popup__field">
@@ -87,7 +95,7 @@ function App() {
             }
           />
 
-          <PopupWithForm title="Вы уверены?" name="delete_card" textSubmit="Да" children= {<></>} />
+          <PopupWithForm title="Вы уверены?" name="delete_card" isOpen='' textSubmit="Да" children= {<></>} />
 
           <ImagePopup />
         </div>

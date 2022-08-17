@@ -1,7 +1,5 @@
 import Footer from './Footer.js';
 
-import {handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick} from './App.js';
-
 
 function Main(props) {
   return (

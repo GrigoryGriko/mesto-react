@@ -1,6 +1,6 @@
 function PopupWidthForm(props) {
   return (
-    <div className={`popup popup_${props.name}`}>
+    <div className={`popup popup_${props.name} ${props.isOpen}`}>
       <form className="popup__container" name={`form-${props.name}`} action="/" method="post" noValidate>
         <button className="popup__button-close" type="button"></button>
 
