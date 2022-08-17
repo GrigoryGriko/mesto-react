@@ -1,6 +1,8 @@
 //import logo from '../logo.svg';
 //import './App.css';
 
+import React, { useState } from 'react'
+
 import Header from './Header.js';
 import Main from './Main.js';
 
@@ -10,24 +12,20 @@ import ImagePopup from './ImagePopup.js';
 
 function App() {
   function handleEditAvatarClick() {
-    isEditAvatarPopupOpen = true;
+    setIsEditProfilePopupOpen(true);
   }
   
   function handleEditProfileClick() {
-    isEditProfilePopupOpen = true;
+    setIsAddPlacePopupOpen(true);
   }
   
   function handleAddPlaceClick() {
-    isAddPlacePopupOpen = true;
+    setIsEditAvatarPopupOpen(true);
   }
 
-  let isEditProfilePopupOpen = false;
-  let isAddPlacePopupOpen = false;
-  let isEditAvatarPopupOpen = false;
-
-  setInterval(() => {
-    console.log(isEditProfilePopupOpen);
-  }, 1000)
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
 
   return (
