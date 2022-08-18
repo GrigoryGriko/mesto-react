@@ -57,9 +57,7 @@ function Main(props) {
                   <button className="elements-grid__like" type="button"></button>
                   <span className="elements-grid__like-counter">{card.likes.length}</span>
                 </div>
-
               </div>
-
             </li>
           ))}
         </ul>
