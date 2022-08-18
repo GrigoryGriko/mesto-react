@@ -9,6 +9,9 @@ function Main(props) {
   const [userDescription, setUserDescription] = useState('...Загрузка');
   const [userAvatar, setUserAvatar] = useState('');
 
+  const [cards, setCards] = useState([]);
+
+
   React.useEffect(() => {
     api.getInitUserData()
       .then((userData) => {
@@ -17,6 +20,14 @@ function Main(props) {
         setUserAvatar(userData.avatar);
       })
   }, [userName, userDescription, userAvatar])
+
+  React.useEffect(() => {
+    api.getInitCards()
+      .then((cardsData) => {
+        setCards(cardsData);
+      })
+  }, [])
+
 
   return (
     <main className="content section">
@@ -34,7 +45,24 @@ function Main(props) {
       </section>
 
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
-        <ul className="elements-grid__list"></ul>
+        <ul className="elements-grid__list">
+          {cards.map((card, i) => (
+            <li className="elements-grid__item" key={i}>
+              <img className="elements-grid__image" src={card.link} alt={card.name} />
+              <button className="elements-grid__delete" type="button"></button>
+
+              <div className="elements-grid__text-like-wrapper">
+                <h2 className="elements-grid__place-name">{card.name}</h2>
+                <div className="elements-grid__like-container">
+                  <button className="elements-grid__like" type="button"></button>
+                  <span className="elements-grid__like-counter">{card.likes.length}</span>
+                </div>
+
+              </div>
+
+            </li>
+          ))}
+        </ul>
       </section>
 
       <Footer />

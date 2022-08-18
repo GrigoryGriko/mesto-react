@@ -99,23 +99,6 @@ function App() {
 
           <ImagePopup />
         </div>
-
-        <template id="elements-grid__item-template">
-          <li className="elements-grid__item">
-            <img className="elements-grid__image" src="/" alt="место" />
-            <button className="elements-grid__delete" type="button"></button>
-
-            <div className="elements-grid__text-like-wrapper">
-              <h2 className="elements-grid__place-name"></h2>
-              <div className="elements-grid__like-container">
-                <button className="elements-grid__like" type="button"></button>
-                <span className="elements-grid__like-counter"></span>
-              </div>
-
-            </div>
-
-          </li>
-        </template>
     </div>
   );
 }
