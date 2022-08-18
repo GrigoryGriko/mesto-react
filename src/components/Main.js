@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 import Footer from './Footer.js';
-import Api from '../utils/Api.js';
+import api from '../utils/Api.js';
 
 
 function Main(props) {
-  const [userName, setUserName] = useState(false);
-  const [userDescription, setUserDescription] = useState(false);
-  const [userAvatar, setUserAvatar] = useState(false);
+  const [userName, setUserName] = useState('...Загрузка');
+  const [userDescription, setUserDescription] = useState('...Загрузка');
+  const [userAvatar, setUserAvatar] = useState('');
+
+  React.useEffect(() => {
+    api.getInitUserData()
+      .then((userData) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+      })
+  }, [userName, userDescription, userAvatar])
 
   return (
     <main className="content section">
