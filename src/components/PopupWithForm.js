@@ -1,12 +1,8 @@
 function PopupWithForm(props) {
-  function onKeyPressed(evt) {    //работает после клика
-    return (evt.code === 'Escape') ? true : false;
-  }
-
   return (
     <div className={`popup popup_${props.name} ${props.isOpen}`}>
       <form className="popup__container" name={`form-${props.name}`} action="/" method="post" noValidate>
-        <button className="popup__button-close" type="button" onKeyDown={onKeyPressed ? props.onClose : false} onClick={props.onClose}></button>
+        <button className="popup__button-close" type="button" onClick={props.onClose}></button>
 
         <div className="popup__content">
           <h2 className="popup__header">{props.title}</h2>
