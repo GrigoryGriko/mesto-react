@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Footer from './Footer.js';
 import api from '../utils/Api.js';
 
+import Card from './Card.js';
+
 
 function Main(props) {
   const [userName, setUserName] = useState('...Загрузка');
@@ -46,19 +48,21 @@ function Main(props) {
 
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
         <ul className="elements-grid__list">
-          {cards.map((card, i) => (
-            <li className="elements-grid__item" key={i}>
-              <img className="elements-grid__image" src={card.link} alt={card.name} />
-              <button className="elements-grid__delete" type="button"></button>
-
-              <div className="elements-grid__text-like-wrapper">
-                <h2 className="elements-grid__place-name">{card.name}</h2>
-                <div className="elements-grid__like-container">
-                  <button className="elements-grid__like" type="button"></button>
-                  <span className="elements-grid__like-counter">{card.likes.length}</span>
+          {cards.map((item, i) => (
+            <Card key={i} card={
+              <li className="elements-grid__item" >
+                <img className="elements-grid__image" src={item.link} alt={item.name} />
+                <button className="elements-grid__delete" type="button"></button>
+          
+                <div className="elements-grid__text-like-wrapper">
+                  <h2 className="elements-grid__place-name">{item.name}</h2>
+                  <div className="elements-grid__like-container">
+                    <button className="elements-grid__like" type="button"></button>
+                    <span className="elements-grid__like-counter">{item.likes.length}</span>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            } />
           ))}
         </ul>
       </section>
