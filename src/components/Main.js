@@ -29,7 +29,6 @@ function Main(props) {
         setCards(cardsData);
       })
   }, [])
-//
 
   return (
     <main className="content section">
