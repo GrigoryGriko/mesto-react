@@ -21,6 +21,8 @@ function Main(props) {
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
       })
+      .catch(err => console.log(err));
+
   }, [userName, userDescription, userAvatar])
 
   React.useEffect(() => {
@@ -28,6 +30,8 @@ function Main(props) {
       .then((cardsData) => {
         setCards(cardsData);
       })
+      .catch(err => console.log(err));
+      
   }, [])
 
   return (
