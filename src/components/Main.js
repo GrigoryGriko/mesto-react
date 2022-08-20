@@ -29,10 +29,7 @@ function Main(props) {
         setCards(cardsData);
       })
   }, [])
-  
-  /*function handleClick(card) {
-    props.onCardClick(card);
-  }*/
+
 
   return (
     <main className="content section">
