@@ -29,7 +29,10 @@ function Main(props) {
         setCards(cardsData);
       })
   }, [])
-
+  
+  /*function handleClick(card) {
+    props.onCardClick(card);
+  }*/
 
   return (
     <main className="content section">
@@ -48,17 +51,22 @@ function Main(props) {
 
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
         <ul className="elements-grid__list">
-          {cards.map((item, i) => (
+          {cards.map((card, i) => (
             <Card key={i} card={
-              <li className="elements-grid__item" >
-                <img className="elements-grid__image" src={item.link} alt={item.name} />
+              <li onClick={
+                  function handleClick() {
+                    props.onCardClick(card);
+                  }
+                }
+                className="elements-grid__item" >
+                <img className="elements-grid__image" src={card.link} alt={card.name} />
                 <button className="elements-grid__delete" type="button"></button>
           
                 <div className="elements-grid__text-like-wrapper">
-                  <h2 className="elements-grid__place-name">{item.name}</h2>
+                  <h2 className="elements-grid__place-name">{card.name}</h2>
                   <div className="elements-grid__like-container">
                     <button className="elements-grid__like" type="button"></button>
-                    <span className="elements-grid__like-counter">{item.likes.length}</span>
+                    <span className="elements-grid__like-counter">{card.likes.length}</span>
                   </div>
                 </div>
               </li>
