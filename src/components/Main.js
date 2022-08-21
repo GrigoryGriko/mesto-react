@@ -52,25 +52,7 @@ function Main(props) {
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
         <ul className="elements-grid__list">
           {cards.map((card, i) => (
-            <Card key={i} card={
-              <li className="elements-grid__item">
-                <img className="elements-grid__image" src={card.link} alt={card.name} 
-                  onClick={
-                    function handleClick() {
-                      props.onCardClick(card);
-                    }
-                  }/>
-                <button className="elements-grid__delete" type="button"></button>
-          
-                <div className="elements-grid__text-like-wrapper">
-                  <h2 className="elements-grid__place-name">{card.name}</h2>
-                  <div className="elements-grid__like-container">
-                    <button className="elements-grid__like" type="button"></button>
-                    <span className="elements-grid__like-counter">{card.likes.length}</span>
-                  </div>
-                </div>
-              </li>
-            } />
+            <Card key={i} card={card} onCardClick={props.onCardClick} />
           ))}
         </ul>
       </section>
