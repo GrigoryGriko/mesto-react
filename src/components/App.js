@@ -11,13 +11,10 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-
-  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   
-  const [selectedCard, setSelectedCard] = useState('');
+  const [selectedCard, setSelectedCard] = useState({});
 
   function handleCardClick(card) {
-    setIsImagePopupOpen(true)
     setSelectedCard(card);
   }
 
@@ -38,7 +35,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false); 
     setIsAddPlacePopupOpen(false);
-    setIsImagePopupOpen(false);
+    setSelectedCard({});
   }
 
   return (
@@ -48,7 +45,7 @@ function App() {
           <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} 
             onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
           
-          <PopupWithForm title="Редактировать профиль" name="edit_data" isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''} textSubmit="Сохранить" onClose={closeAllPopups}  
+          <PopupWithForm title="Редактировать профиль" name="edit_data" isOpen={isEditProfilePopupOpen} textSubmit="Сохранить" onClose={closeAllPopups}  
             children= {
               <>
                 <label className="popup__field">
@@ -70,7 +67,7 @@ function App() {
             }
           />
 
-          <PopupWithForm title="Новое место" name="add_card" isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''} textSubmit="Создать" onClose={closeAllPopups} 
+          <PopupWithForm title="Новое место" name="add_card" isOpen={isAddPlacePopupOpen} textSubmit="Создать" onClose={closeAllPopups} 
             children= {
               <>
                 <label className="popup__field">
@@ -92,23 +89,19 @@ function App() {
             }
           />
 
-          <PopupWithForm title="Обновить аватар" name="update_avatar" isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''} textSubmit="Сохранить" onClose={closeAllPopups} 
+          <PopupWithForm title="Обновить аватар" name="update_avatar" isOpen={isEditAvatarPopupOpen} textSubmit="Сохранить" onClose={closeAllPopups} 
             children= {
-              <>
-                <label className="popup__field">
-                  <input className="popup__name-input input-general-properties" id="linkAvatarInput" name="avatar-link" placeholder="Ссылка на аватар" type="url" defaultValue="" required />
+              <label className="popup__field">
+                <input className="popup__name-input input-general-properties" id="linkAvatarInput" name="avatar-link" placeholder="Ссылка на аватар" type="url" defaultValue="" required />
 
-                  <span className="popup__input-error linkAvatarInput-error">
-                    Ошибка валидации ссылки на аватар
-                  </span>
-                </label>
-              </>
+                <span className="popup__input-error linkAvatarInput-error">
+                  Ошибка валидации ссылки на аватар
+                </span>
+              </label>
             }
           />
 
-          <PopupWithForm title="Вы уверены?" name="delete_card" textSubmit="Да" onClose={closeAllPopups}  children= {<></>} />
-
-          <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
     </div>
   );

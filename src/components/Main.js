@@ -23,7 +23,7 @@ function Main(props) {
       })
       .catch(err => console.log(err));
 
-  }, [userName, userDescription, userAvatar])
+  }, [])
 
   React.useEffect(() => {
     api.getInitCards()
@@ -31,7 +31,7 @@ function Main(props) {
         setCards(cardsData);
       })
       .catch(err => console.log(err));
-      
+
   }, [])
 
   return (
@@ -53,13 +53,13 @@ function Main(props) {
         <ul className="elements-grid__list">
           {cards.map((card, i) => (
             <Card key={i} card={
-              <li onClick={
-                  function handleClick() {
-                    props.onCardClick(card);
-                  }
-                }
-                className="elements-grid__item" >
-                <img className="elements-grid__image" src={card.link} alt={card.name} />
+              <li className="elements-grid__item">
+                <img className="elements-grid__image" src={card.link} alt={card.name} 
+                  onClick={
+                    function handleClick() {
+                      props.onCardClick(card);
+                    }
+                  }/>
                 <button className="elements-grid__delete" type="button"></button>
           
                 <div className="elements-grid__text-like-wrapper">

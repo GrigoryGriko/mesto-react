@@ -1,6 +1,6 @@
 function PopupWithForm(props) {
   return (
-    <div className={`popup popup_${props.name} ${props.isOpen}`}>
+    <div className={`popup popup_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}>
       <form className="popup__container" name={`form-${props.name}`} action="/" method="post" noValidate>
         <button className="popup__button-close" type="button" onClick={props.onClose}></button>
 
