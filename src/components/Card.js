@@ -9,12 +9,9 @@ export default class Card extends React.Component {
       `elements-grid__delete ${this.isOwn ? '' : 'elements-grid__delete_hidden'}`
     );
     
-    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
     this.isLiked = this.props.card.likes.some(i => i._id === this.props.currentUser._id);
-
-// Создаём переменную, которую после зададим в `className` для кнопки лайка
     this.cardLikeButtonClassName = (
-      `elements-grid__like ${this.isLiked ? '' : 'elements-grid__like_active'}`
+      `elements-grid__like ${this.isLiked ? 'elements-grid__like_active' : ''}`
     ); 
     
   }
