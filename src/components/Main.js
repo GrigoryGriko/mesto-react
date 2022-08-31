@@ -1,26 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import { CardsContext } from '../contexts/CardsContext.js';
 
 import Footer from './Footer.js';
-import api from '../utils/Api.js';
-
 import Card from './Card.js';
 
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-
-  const [cards, setCards] = useState([]);
-
-  React.useEffect(() => {
-    api.getInitCards()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch(err => console.log(err));
-
-  }, [])
+  const cards = React.useContext(CardsContext);
 
   return (
     <main className="content section">
@@ -40,7 +29,7 @@ function Main(props) {
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
         <ul className="elements-grid__list">
           {cards.map((card, i) => (
-            <Card key={i} card={card} onCardClick={props.onCardClick} />
+            <Card key={i} card={card} onCardClick={props.onCardClick} currentUser={currentUser}/>
           ))}
         </ul>
       </section>

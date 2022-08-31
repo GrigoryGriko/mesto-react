@@ -7,6 +7,7 @@
 
 @import url(./blocks/content/content.css);
 @import url(./blocks/elements-grid/__delete/elements-grid__delete.css);
+@import url(./blocks/elements-grid/__delete/_hidden/elements-grid__delete_hidden.css);
 @import url(./blocks/elements-grid/__image/elements-grid__image.css);
 @import url(./blocks/elements-grid/__item/elements-grid__item.css);
 @import url(./blocks/elements-grid/__like-container/elements-grid__like-container.css);
