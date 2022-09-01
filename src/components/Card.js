@@ -20,6 +20,9 @@ export default class Card extends React.Component {
     this.props.onCardClick(this.props.card);
   }
 
+  handeleLikeClick = () => {
+    this.props.onCardLike(this.props.card);
+  }
 
   render() {
     return (

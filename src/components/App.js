@@ -56,6 +56,16 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+  
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch(err => console.log(err));
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false); 
@@ -70,7 +80,7 @@ function App() {
           <div className="page">
               <Header />
               <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} 
-                onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
+                onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onCardLike={handleCardLike}/>
               
               <PopupWithForm title="Редактировать профиль" name="edit_data" isOpen={isEditProfilePopupOpen} textSubmit="Сохранить" onClose={closeAllPopups}  
                 children= {
