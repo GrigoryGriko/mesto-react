@@ -85,7 +85,7 @@ function App() {
       })
       .catch(err => console.log(err));
   }
-//
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false); 
