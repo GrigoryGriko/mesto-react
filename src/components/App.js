@@ -7,6 +7,7 @@ import Header from './Header.js';
 import Main from './Main.js';
 
 import PopupWithForm from './PopupWithForm.js';
+import EditProfilePopup from './EditProfilePopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
 
@@ -49,7 +50,7 @@ function App() {
   }
   
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(true); 
+    setIsEditProfilePopupOpen(true);
   }
   
   function handleAddPlaceClick() {
@@ -93,27 +94,7 @@ function App() {
               <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} 
                 onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handelCardDelete}/>
               
-              <PopupWithForm title="Редактировать профиль" name="edit_data" isOpen={isEditProfilePopupOpen} textSubmit="Сохранить" onClose={closeAllPopups}  
-                children= {
-                  <>
-                    <label className="popup__field">
-                      <input className="popup__name-input input-general-properties" id="nameInput" name="your-name" placeholder="Ваше имя" type="text" defaultValue="" minLength="2" maxLength="40" required />
-
-                      <span className="popup__input-error nameInput-error">
-                        Ошибка валидации имени
-                      </span>
-                    </label>
-
-                    <label className="popup__field">
-                      <input className="popup__job-input input-general-properties" id="jobInput" name="your-job" placeholder="Ваш род деятельности" type="text" defaultValue="" minLength="2" maxLength="200" required />
-
-                      <span className="popup__input-error jobInput-error">
-                        Ошибка валидации рода деятельности
-                      </span>
-                    </label>
-                  </>
-                }
-              />
+              <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}></EditProfilePopup>
 
               <PopupWithForm title="Новое место" name="add_card" isOpen={isAddPlacePopupOpen} textSubmit="Создать" onClose={closeAllPopups} 
                 children= {
