@@ -25,7 +25,7 @@ function App() {
   React.useEffect(() => {
     api.getInitUserData()
       .then((userData) => {
-        setCurrentUser(userData)
+        setCurrentUser(userData);
       })
       .catch(err => console.log(err));
 
@@ -77,6 +77,14 @@ function App() {
     .catch(err => console.log(err));
   }
 
+  function handleUpdateUser({name, about}) {
+    api.editDataUser({nameInput: name, jobInput: about})
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
@@ -91,16 +99,41 @@ function App() {
         <div className="App">
           <div className="page">
               <Header />
-              <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} 
-                onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handelCardDelete}/>
+              <Main 
+                onEditProfile={handleEditProfileClick} 
+                onAddPlace={handleAddPlaceClick} 
+                onEditAvatar={handleEditAvatarClick} 
+                onCardClick={handleCardClick} 
+                onCardLike={handleCardLike} 
+                onCardDelete={handelCardDelete}
+              />
               
-              <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}></EditProfilePopup>
+              <EditProfilePopup 
+                isOpen={isEditProfilePopupOpen} 
+                onClose={closeAllPopups} 
+                onUpdateUser={handleUpdateUser}
+              ></EditProfilePopup>
 
-              <PopupWithForm title="Новое место" name="add_card" isOpen={isAddPlacePopupOpen} textSubmit="Создать" onClose={closeAllPopups} 
+              <PopupWithForm 
+                title="Новое место" 
+                name="add_card" 
+                isOpen={isAddPlacePopupOpen} 
+                textSubmit="Создать" 
+                onClose={closeAllPopups} 
                 children= {
                   <>
                     <label className="popup__field">
-                      <input className="popup__name-input input-general-properties" id="nameInputCard" name="card-name" placeholder="Название" type="text" defaultValue="" minLength="2" maxLength="30" required />
+                      <input 
+                        className="popup__name-input input-general-properties" 
+                        id="nameInputCard" 
+                        name="card-name" 
+                        placeholder="Название" 
+                        type="text" 
+                        defaultValue="" 
+                        minLength="2" 
+                        maxLength="30" 
+                        required 
+                      />
 
                       <span className="popup__input-error nameInputCard-error">
                         Ошибка валидации названия
@@ -108,7 +141,15 @@ function App() {
                     </label>
 
                     <label className="popup__field">
-                      <input className="popup__job-input input-general-properties" id="linkInput" name="image-link" placeholder="Ссылка на картинку" type="url" defaultValue="" required />
+                      <input 
+                        className="popup__job-input input-general-properties" 
+                        id="linkInput" 
+                        name="image-link" 
+                        placeholder="Ссылка на картинку" 
+                        type="url" 
+                        defaultValue="" 
+                        required 
+                      />
 
                       <span className="popup__input-error linkInput-error">
                         Ошибка валидации ссылки на картинку
@@ -121,7 +162,15 @@ function App() {
               <PopupWithForm title="Обновить аватар" name="update_avatar" isOpen={isEditAvatarPopupOpen} textSubmit="Сохранить" onClose={closeAllPopups} 
                 children= {
                   <label className="popup__field">
-                    <input className="popup__name-input input-general-properties" id="linkAvatarInput" name="avatar-link" placeholder="Ссылка на аватар" type="url" defaultValue="" required />
+                    <input 
+                      className="popup__name-input input-general-properties" 
+                      id="linkAvatarInput" 
+                      name="avatar-link" 
+                      placeholder="Ссылка на аватар" 
+                      type="url" 
+                      defaultValue="" 
+                      required 
+                    />
 
                     <span className="popup__input-error linkAvatarInput-error">
                       Ошибка валидации ссылки на аватар
