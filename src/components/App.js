@@ -6,9 +6,9 @@ import { CardsContext } from '../contexts/CardsContext.js';
 import Header from './Header.js';
 import Main from './Main.js';
 
-import PopupWithForm from './PopupWithForm.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
 
@@ -23,6 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
+  
   React.useEffect(() => {
     api.getInitUserData()
       .then((userData) => {
@@ -96,6 +97,15 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  function handleAddPlaceSubmit(cards) {
+    api.addCard(cards)
+      .then((cards) => {
+        setSelectedCard(cards);
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false); 
@@ -116,6 +126,7 @@ function App() {
                 onCardClick={handleCardClick} 
                 onCardLike={handleCardLike} 
                 onCardDelete={handelCardDelete}
+                cards={cards}
               />
               
               <EditProfilePopup 
@@ -124,50 +135,12 @@ function App() {
                 onUpdateUser={handleUpdateUser}
               ></EditProfilePopup>
 
-              <PopupWithForm 
-                title="Новое место" 
-                name="add_card" 
+              <AddPlacePopup
+                onAddPlace={handleAddPlaceSubmit}
                 isOpen={isAddPlacePopupOpen} 
-                textSubmit="Создать" 
                 onClose={closeAllPopups} 
-                children= {
-                  <>
-                    <label className="popup__field">
-                      <input 
-                        className="popup__name-input input-general-properties" 
-                        id="nameInputCard" 
-                        name="card-name" 
-                        placeholder="Название" 
-                        type="text" 
-                        defaultValue="" 
-                        minLength="2" 
-                        maxLength="30" 
-                        required 
-                      />
-
-                      <span className="popup__input-error nameInputCard-error">
-                        Ошибка валидации названия
-                      </span>
-                    </label>
-
-                    <label className="popup__field">
-                      <input 
-                        className="popup__job-input input-general-properties" 
-                        id="linkInput" 
-                        name="image-link" 
-                        placeholder="Ссылка на картинку" 
-                        type="url" 
-                        defaultValue="" 
-                        required 
-                      />
-
-                      <span className="popup__input-error linkInput-error">
-                        Ошибка валидации ссылки на картинку
-                      </span>
-                    </label>
-                  </>
-                }
-              />
+                cards={cards}
+              ></AddPlacePopup>
 
               <EditAvatarPopup
                 onUpdateAvatar={handleUpdateAvatar}

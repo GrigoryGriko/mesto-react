@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import { CardsContext } from '../contexts/CardsContext.js';
 
 import Footer from './Footer.js';
 import Card from './Card.js';
@@ -9,7 +8,6 @@ import Card from './Card.js';
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const cards = React.useContext(CardsContext);
 
   return (
     <main className="content section">
@@ -28,7 +26,7 @@ function Main(props) {
 
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
         <ul className="elements-grid__list">
-          {cards.map((card, i) => (
+          {props.cards.map((card, i) => (
             <Card key={i} card={card} onCardClick={props.onCardClick} currentUser={currentUser} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} />
           ))}
         </ul>

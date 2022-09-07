@@ -21,7 +21,7 @@ function EditAvatarPopup(props) {
       textSubmit="Сохранить" 
       onClose={props.onClose}
       onSubmit={handleSubmit}
-      children= {
+      children={
         <label className="popup__field">
           <input
             ref={refImageUrl} 
