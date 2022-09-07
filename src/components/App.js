@@ -102,7 +102,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
   }
-//
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
