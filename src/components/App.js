@@ -8,6 +8,7 @@ import Main from './Main.js';
 
 import PopupWithForm from './PopupWithForm.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
 
@@ -79,6 +80,15 @@ function App() {
 
   function handleUpdateUser({name, about}) {
     api.editDataUser({nameInput: name, jobInput: about})
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  }
+
+  function handleUpdateAvatar(avatar) {
+    api.updateAvatar(avatar)
       .then((userData) => {
         setCurrentUser(userData);
         closeAllPopups();
@@ -159,24 +169,10 @@ function App() {
                 }
               />
 
-              <PopupWithForm title="Обновить аватар" name="update_avatar" isOpen={isEditAvatarPopupOpen} textSubmit="Сохранить" onClose={closeAllPopups} 
-                children= {
-                  <label className="popup__field">
-                    <input 
-                      className="popup__name-input input-general-properties" 
-                      id="linkAvatarInput" 
-                      name="avatar-link" 
-                      placeholder="Ссылка на аватар" 
-                      type="url" 
-                      defaultValue="" 
-                      required 
-                    />
-
-                    <span className="popup__input-error linkAvatarInput-error">
-                      Ошибка валидации ссылки на аватар
-                    </span>
-                  </label>
-                }
+              <EditAvatarPopup
+                onUpdateAvatar={handleUpdateAvatar}
+                isOpen={isEditAvatarPopupOpen} 
+                onClose={closeAllPopups} 
               />
 
               <ImagePopup card={selectedCard} onClose={closeAllPopups} />
