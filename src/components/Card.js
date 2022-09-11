@@ -1,27 +1,6 @@
 import React from 'react';
 
 export default class Card extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.isOwn = this.props.card.owner._id === this.props.currentUser._id;
-    this.cardDeleteButtonClassName = (
-      `elements-grid__delete ${this.isOwn ? '' : 'elements-grid__delete_hidden'}`
-    );
-    
-    this.isLiked = this.props.card.likes.some(i => i._id === this.props.currentUser._id);
-    
-    this.cardLikeButtonClassName = (
-      `elements-grid__like ${this.isLiked ? 'elements-grid__like_active' : ''}`
-    ); 
-    
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.isLiked !== prevProps.isLiked) {
-      console.log(this.isLiked + ' ' + this.cardLikeButtonClassName + ' ' + this.props.card._id);
-    }
-  }
 
   handleClick = () => {
     this.props.onCardClick(this.props.card);
@@ -36,6 +15,17 @@ export default class Card extends React.Component {
   }
   
   render() {
+    this.isOwn = this.props.card.owner._id === this.props.currentUser._id;
+    this.cardDeleteButtonClassName = (
+      `elements-grid__delete ${this.isOwn ? '' : 'elements-grid__delete_hidden'}`
+    );
+
+    this.isLiked = this.props.card.likes.some(i => i._id === this.props.currentUser._id);
+
+    this.cardLikeButtonClassName = (
+      `elements-grid__like ${this.isLiked ? 'elements-grid__like_active' : ''}`
+    );
+
     return (
       <li className="elements-grid__item">
         <img className="elements-grid__image" src={this.props.card.link} alt={this.props.card.name} 

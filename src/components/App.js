@@ -65,7 +65,6 @@ function App() {
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
       setCards( (cards) => cards.map((item) => ((item._id === card._id) ? newCard : item)) );
-      console.dir(newCard);
     })
     .catch(err => console.log(err));
   }
@@ -97,7 +96,6 @@ function App() {
   }
 
   function handleAddPlaceSubmit({name, link}) {
-    console.log({name, link});
     api.addCard({name, link})
       .then((newCard) => {
         setSelectedCard(newCard);
