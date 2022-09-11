@@ -31,7 +31,7 @@ export default class Card extends React.Component {
         <img className="elements-grid__image" src={this.props.card.link} alt={this.props.card.name} 
           onClick={this.handleClick}/>
         <button className={this.cardDeleteButtonClassName} onClick={this.handleCardDelete} type="button"></button>
-
+//
         <div className="elements-grid__text-like-wrapper">
           <h2 className="elements-grid__place-name">{this.props.card.name}</h2>
           <div className="elements-grid__like-container">
