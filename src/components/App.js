@@ -60,20 +60,19 @@ function App() {
   }
 
   function handleCardLike(card) {
-    console.log(card);
-
     const isLiked = card.likes.some(i => i._id === currentUser._id);
   
     api.changeLikeCardStatus(card._id, !isLiked)
-    .then((card) => {
-      setCards( (cards) => cards.map((item) => ((item._id === card._id) ? card: item)) );
+    .then((newCard) => {
+      setCards( (cards) => cards.map((item) => ((item._id === card._id) ? newCard : item)) );
+      console.dir(newCard);
     })
     .catch(err => console.log(err));
   }
 
   function handelCardDelete(card) {
     api.deleteCard(card._id)
-    .then((card) => {
+    .then(() => {
       setCards( (cards) => cards.filter((item) => (item._id !== card._id)) );
     })
     .catch(err => console.log(err));
@@ -97,11 +96,13 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  function handleAddPlaceSubmit(cards) {
-    api.addCard(cards)
-      .then((cards) => {
-        setSelectedCard(cards);
+  function handleAddPlaceSubmit({name, link}) {
+    console.log({name, link});
+    api.addCard({name, link})
+      .then((newCard) => {
+        setSelectedCard(newCard);
         closeAllPopups();
+        setCards([newCard, ...cards]);
       })
       .catch(err => console.log(err));
   }

@@ -10,10 +10,17 @@ export default class Card extends React.Component {
     );
     
     this.isLiked = this.props.card.likes.some(i => i._id === this.props.currentUser._id);
+    
     this.cardLikeButtonClassName = (
       `elements-grid__like ${this.isLiked ? 'elements-grid__like_active' : ''}`
     ); 
     
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.isLiked !== prevProps.isLiked) {
+      console.log(this.isLiked + ' ' + this.cardLikeButtonClassName + ' ' + this.props.card._id);
+    }
   }
 
   handleClick = () => {
@@ -27,7 +34,7 @@ export default class Card extends React.Component {
   handleCardDelete = () => {
     this.props.onCardDelete(this.props.card);
   }
-
+  
   render() {
     return (
       <li className="elements-grid__item">

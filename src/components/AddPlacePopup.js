@@ -1,7 +1,7 @@
 import PopupWithForm from './PopupWithForm.js';
 import React, { useState } from 'react';
 
-import { CardsContext } from '../contexts/CardContext.js';
+import { CardsContext } from '../contexts/CardsContext.js';
 
 
 
@@ -33,7 +33,7 @@ function AddPlacePopup(props) {
     e.preventDefault();
   
     props.onAddPlace({
-      cards: cardName,
+      name: cardName,
       link: cardLink
     });
   } 
@@ -54,6 +54,7 @@ function AddPlacePopup(props) {
               id="nameInputCard" 
               onChange={handleChangeCardName}
               name="card-name" 
+              value={cardName} 
               placeholder="Название" 
               type="text"
               minLength="2" 
@@ -72,6 +73,7 @@ function AddPlacePopup(props) {
               id="linkInput"
               onChange={handleChangeCardLink} 
               name="image-link" 
+              value={cardLink}
               placeholder="Ссылка на картинку" 
               type="url"
               required 
