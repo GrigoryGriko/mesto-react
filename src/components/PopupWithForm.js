@@ -22,6 +22,5 @@ function PopupWithForm(props) {
     </div>
   )
 }
-//
 
 export default PopupWithForm;
