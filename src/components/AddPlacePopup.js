@@ -1,25 +1,11 @@
 import PopupWithForm from './PopupWithForm.js';
 import React, { useState } from 'react';
 
-import { CardsContext } from '../contexts/CardsContext.js';
-
 
 
 function AddPlacePopup(props) {
-  const cards = React.useContext(CardsContext);
-
   const [cardName, setCardName] = useState('');
   const [cardLink, setCardLink] = useState('');
-
-  React.useEffect(() => {
-    if ( (cards.cardName !== null && cards.cardLink !== null) && 
-    (cards.cardName !== undefined && cards.cardLink !== undefined) && 
-    (cards.cardName !== '' && cards.cardLink !== '') ) {
-      setCardName(cards.cardName);
-      setCardLink(cards.cardLink);
-    }
-  }, [cards]);
-
 
   function handleChangeCardName(e) {
     setCardName(e.target.value);

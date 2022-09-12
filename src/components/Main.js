@@ -26,8 +26,8 @@ function Main(props) {
 
       <section className="elements-grid section-size-full" aria-label="Карточки мест">
         <ul className="elements-grid__list">
-          {props.cards.map((card, i) => (
-            <Card key={i} card={card} onCardClick={props.onCardClick} currentUser={currentUser} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} />
+          {props.cards.map((card) => (
+            <Card key={card._id} card={card} onCardClick={props.onCardClick} currentUser={currentUser} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} />
           ))}
         </ul>
       </section>

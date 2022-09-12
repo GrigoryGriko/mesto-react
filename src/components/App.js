@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import { CardsContext } from '../contexts/CardsContext.js';
 
 import Header from './Header.js';
 import Main from './Main.js';
@@ -98,7 +97,6 @@ function App() {
   function handleAddPlaceSubmit({name, link}) {
     api.addCard({name, link})
       .then((newCard) => {
-        setSelectedCard(newCard);
         closeAllPopups();
         setCards([newCard, ...cards]);
       })
@@ -114,43 +112,41 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CardsContext.Provider value={cards}>
-        <div className="App">
-          <div className="page">
-              <Header />
-              <Main 
-                onEditProfile={handleEditProfileClick} 
-                onAddPlace={handleAddPlaceClick} 
-                onEditAvatar={handleEditAvatarClick} 
-                onCardClick={handleCardClick} 
-                onCardLike={handleCardLike} 
-                onCardDelete={handelCardDelete}
-                cards={cards}
-              />
-              
-              <EditProfilePopup 
-                isOpen={isEditProfilePopupOpen} 
-                onClose={closeAllPopups} 
-                onUpdateUser={handleUpdateUser}
-              ></EditProfilePopup>
+      <div className="App">
+        <div className="page">
+            <Header />
+            <Main 
+              onEditProfile={handleEditProfileClick} 
+              onAddPlace={handleAddPlaceClick} 
+              onEditAvatar={handleEditAvatarClick} 
+              onCardClick={handleCardClick} 
+              onCardLike={handleCardLike} 
+              onCardDelete={handelCardDelete}
+              cards={cards}
+            />
+            
+            <EditProfilePopup 
+              isOpen={isEditProfilePopupOpen} 
+              onClose={closeAllPopups} 
+              onUpdateUser={handleUpdateUser}
+            ></EditProfilePopup>
 
-              <AddPlacePopup
-                onAddPlace={handleAddPlaceSubmit}
-                isOpen={isAddPlacePopupOpen} 
-                onClose={closeAllPopups} 
-                cards={cards}
-              ></AddPlacePopup>
+            <AddPlacePopup
+              onAddPlace={handleAddPlaceSubmit}
+              isOpen={isAddPlacePopupOpen} 
+              onClose={closeAllPopups} 
+              cards={cards}
+            ></AddPlacePopup>
 
-              <EditAvatarPopup
-                onUpdateAvatar={handleUpdateAvatar}
-                isOpen={isEditAvatarPopupOpen} 
-                onClose={closeAllPopups} 
-              />
+            <EditAvatarPopup
+              onUpdateAvatar={handleUpdateAvatar}
+              isOpen={isEditAvatarPopupOpen} 
+              onClose={closeAllPopups} 
+            />
 
-              <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            </div>
-        </div>
-      </CardsContext.Provider>
+            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          </div>
+      </div>
     </CurrentUserContext.Provider>
   );
 }
