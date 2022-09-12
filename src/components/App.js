@@ -22,7 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  
+ /* 
   React.useEffect(() => {
     api.getInitUserData()
       .then((userData) => {
@@ -39,6 +39,18 @@ function App() {
       })
       .catch(err => console.log(err));
 
+  }, [])*/
+
+  React.useEffect(() => {
+    Promise.all([api.getInitCards(), api.getInitUserData()])
+    .then(([cards, user]) => {
+      setCurrentUser(user);
+
+      setCards(cards);
+    })
+    .catch((err) => {
+      console.log(`Ошибка загрузки данных пользователя ${err}`);
+    });
   }, [])
 
   function handleCardClick(card) {
