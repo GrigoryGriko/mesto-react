@@ -21,25 +21,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-
- /* 
-  React.useEffect(() => {
-    api.getInitUserData()
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch(err => console.log(err));
-
-  }, [])
-
-  React.useEffect(() => {
-    api.getInitCards()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch(err => console.log(err));
-
-  }, [])*/
+  
 
   React.useEffect(() => {
     Promise.all([api.getInitCards(), api.getInitUserData()])
