@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
+import { Route, Routes, Redirect } from "react-router-dom";
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 import Header from './Header.js';
 import Main from './Main.js';
+import Login from './Login.js';
+import Register from './Register.js';
 
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
+import ProtectedRoute from './ProtectedRoute.js';
 
 
 function App() {
@@ -104,21 +108,44 @@ function App() {
     setSelectedCard({});
   }
 
+  let loggedIn = false;
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <div className="page">
             <Header />
-            <Main 
-              onEditProfile={handleEditProfileClick} 
-              onAddPlace={handleAddPlaceClick} 
-              onEditAvatar={handleEditAvatarClick} 
-              onCardClick={handleCardClick} 
-              onCardLike={handleCardLike} 
-              onCardDelete={handelCardDelete}
-              cards={cards}
-            />
-            
+            <Routes>
+              <ProtectedRoute
+                exact
+                path="/"
+                component={Main}
+                loggedIn={loggedIn}
+
+                onEditProfile={handleEditProfileClick} 
+                onAddPlace={handleAddPlaceClick} 
+                onEditAvatar={handleEditAvatarClick} 
+                onCardClick={handleCardClick} 
+                onCardLike={handleCardLike} 
+                onCardDelete={handelCardDelete}
+                cards={cards}
+              >
+                
+
+                <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+              </ProtectedRoute>
+              <Route path='/sign-up'>
+                <Login />
+              </Route>
+              <Route path='/sign-in'>
+                <Register />
+              </Route>
+
+              <Route>
+                {loggedIn ? <Redirect to="/" /> : <Redirect to="sign-up" />}
+              </Route>
+            </Routes>
+
             <EditProfilePopup 
               isOpen={isEditProfilePopupOpen} 
               onClose={closeAllPopups} 
@@ -137,8 +164,6 @@ function App() {
               isOpen={isEditAvatarPopupOpen} 
               onClose={closeAllPopups} 
             />
-
-            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           </div>
       </div>
     </CurrentUserContext.Provider>
